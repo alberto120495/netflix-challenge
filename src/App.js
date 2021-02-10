@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -10,9 +10,11 @@ import Home from "./screens/Home";
 import LoginScreen from "./screens/LoginScreen";
 import "./App.css";
 import ProfileScreen from "./screens/ProfileScreen";
+import Animacion from "./components/Animacion/Animacion";
 
 function App() {
   const user = useSelector(selectUser);
+  const [animacion, setAnimacion] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,11 +27,15 @@ function App() {
             email: userAuth.email,
           })
         );
+        //setAnimacion(true);
       } else {
         //logged out
         dispatch(logout());
       }
     });
+    setTimeout(() => {
+      setAnimacion(false);
+    }, 5000);
 
     return unsubscribe; //Clean up
   }, [dispatch]);
@@ -45,7 +51,7 @@ function App() {
               <ProfileScreen />
             </Route>
             <Route exact path="/">
-              <Home />
+              {animacion ? <Animacion /> : <Home />}
             </Route>
           </Switch>
         )}

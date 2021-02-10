@@ -4,9 +4,12 @@ import "./ProfileScreen.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { auth } from "../firebase";
+import Plans from "../components/Plans";
+import { selectPlan } from "../features/planSlice";
 
 function ProfileScreen() {
   const user = useSelector(selectUser);
+  const plan = useSelector(selectPlan);
 
   return (
     <div className="profileScreen">
@@ -19,43 +22,10 @@ function ProfileScreen() {
             alt="Netlix Logo"
           />
           <div className="profileScreen__details">
-            <h2>{user.email}</h2>
+            <h2>{user?.email}</h2>
             <div className="profileScreen__plans">
-              <h3>Plans (Current Plan: premium)</h3>
-              <p>Renewal date:04/03/2021</p>
-              <div className="profileScreen__plan">
-                <div className="profileScreen__planOption">
-                  <div className="plan">
-                    <h3>Netflix Standard</h3>
-                    <p>1080p</p>
-                  </div>
-                  <button className="profile__planButton" onClick={() => {}}>
-                    Subscribe
-                  </button>
-                </div>
-                <div className="profileScreen__planOption">
-                  <div className="plan">
-                    <h3>Netflix Basic</h3>
-                    <p>1080p</p>
-                  </div>
-                  <button className="profile__planButton" onClick={() => {}}>
-                    Subscribe
-                  </button>
-                </div>
-                <div className="profileScreen__planOption">
-                  <div className="plan">
-                    <h3>Netflix Premium</h3>
-                    <p>4k+HDR</p>
-                  </div>
-                  <button
-                    className="profile__planButton--active"
-                    onClick={() => {}}
-                  >
-                    Current Package
-                  </button>
-                </div>
-              </div>
-
+              <h3>Plans ({plan?.name})</h3>
+              <Plans />
               <button
                 className="profileScreen__sigOut"
                 onClick={() => {
