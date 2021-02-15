@@ -16,7 +16,6 @@ function App() {
   const user = useSelector(selectUser);
   const [animacion, setAnimacion] = useState(true);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
