@@ -50,3 +50,7 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.register {
+  background-color: gray !important;
+}
